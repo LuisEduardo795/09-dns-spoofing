@@ -1,7 +1,6 @@
-# 09-dns-spoofing
-DNS Spoofing + servidor web falso integrado
 
 # 09 — Ataque DNS Spoofing / DNS Poisoning
+DNS Spoofing + servidor web falso integrado
 
 
 ## Objetivo del Laboratorio
