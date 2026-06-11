@@ -113,13 +113,17 @@ sudo python3 dns_spoof.py -i ens3 --target itla.edu.do \
 ## Capturas de Pantalla
 
 ### DNS Spoofing activo
-![DNS Spoof](capturas/dns_spoof_activo.png)
+<img width="542" height="353" alt="image" src="https://github.com/user-attachments/assets/1c92643a-378e-4ae0-a1d4-7b56929e97b6" />
+<img width="472" height="330" alt="image" src="https://github.com/user-attachments/assets/31b152ff-313f-423f-b7a8-606ba75dcc61" />
+
 
 ### Víctima resolviendo dominio falso
-![DNS falso](capturas/dns_spoof_victima.png)
+<img width="372" height="267" alt="image" src="https://github.com/user-attachments/assets/f1076b0c-03f1-4f68-b91e-bfe12f0ab95d" />
+
 
 ### Página web falsa en el browser
-![Web falsa](capturas/dns_spoof_web.png)
+<img width="477" height="344" alt="image" src="https://github.com/user-attachments/assets/8e1396ce-ea44-4efb-af9e-845ee0835b73" />
+
 
 ---
 
